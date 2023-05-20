@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
 
+
+
     private float movementInputDirection;
     private Rigidbody2D rb;
     private Animator anim;
-   
+    private bool canMove = true;
+    private bool canFlip =true;
+    private int facingDirection = 1;
   
     public float movementSpeed = 10.0f;
     public float jumpForce = 18.0f;
@@ -20,30 +24,40 @@ public class PlayerController : MonoBehaviour{
     public LayerMask whatIsGround;
     public Transform groundCheck;
 
-
-    private bool isDashing;
+    [SerializeField]
+    private AudioSource walkSoundEffect;
+    [SerializeField]
+    private AudioSource jumpSoundEffect;
+    private bool isDashing = false;
     private float dashTimeLeft;
     private float lastImageXpos;
     private float lastDash = -100;
     public float dashTime; 
-    public float dashSpeed;
+    public float dashSpeed; //lo rapido que se mueve en el dash
     public float distanceBetweenImages;
     public float dashCoolDown;
 
+    [SerializeField] private Transform controladorGolpe;
+    [SerializeField] private float radioGolpe;
+    [SerializeField] private float danoGolpe;
+    [SerializeField] private float tiempoEntreAtaques;
+    [SerializeField] private float tiempoSiguienteAtaque;
 
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        UpdateAnimations();
+        UpdateAnimationsAndSounds();
+        Debug.Log(" Player created");
     }
 
     // Update is called once per frame
     void Update(){
         CheckInput();
         CheckMovmentDirection();
-        UpdateAnimations();
+        UpdateAnimationsAndSounds();
         CheckIfCanJump();
+        CheckDash();
     }
     private void FixedUpdate(){
         ApplyMovement();
@@ -59,15 +73,13 @@ public class PlayerController : MonoBehaviour{
         }
     }
     private void CheckMovmentDirection() {
-        if (isFacingRigth && movementInputDirection < 0)
-        {
+        if (isFacingRigth && movementInputDirection < 0){
             Flip();
         }
         else if (!isFacingRigth && movementInputDirection > 0) {
             Flip();
         }
-        if (rb.velocity.x != 0)
-        {
+        if (rb.velocity.x != 0 && !isDashing){
             isWalking = true;
         }
         else {
@@ -75,20 +87,31 @@ public class PlayerController : MonoBehaviour{
         }
     }
 
-    private void UpdateAnimations() {
+    private void UpdateAnimationsAndSounds() {
         anim.SetBool("isWalking", isWalking);
+        if (isWalking && isGrounded && !isDashing && !walkSoundEffect.isPlaying) { 
+            walkSoundEffect.Play();
+        }
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isDashing",isDashing);
     }
     private void CheckInput(){
         movementInputDirection = Input.GetAxisRaw("Horizontal");
-
         if (Input.GetButtonDown("Jump")) {
             Jump();
         }
-
-        if (Input.GetButtonDown("Dash")) {
-            AttempToDash();
+        if (Input.GetButtonDown("Dash")){
+            if (Time.time >= (lastDash + dashCoolDown)) {
+                AttempToDash();
+            }  
+        }
+        if (tiempoSiguienteAtaque > 0){
+            tiempoSiguienteAtaque -= Time.deltaTime;
+        }
+        if (Input.GetButtonDown("Fire1") && tiempoSiguienteAtaque <= 0){
+            Atack();
+            tiempoSiguienteAtaque = tiempoEntreAtaques;
         }
     }
 
@@ -96,7 +119,6 @@ public class PlayerController : MonoBehaviour{
         isDashing = true;
         dashTimeLeft = dashTime;
         lastDash = Time.time;
-
         PlayerAfterImagePool.Instance.GetFromPool();
         lastImageXpos = transform.position.x;
     }
@@ -104,21 +126,21 @@ public class PlayerController : MonoBehaviour{
     private void CheckDash() {
         if (isDashing) {
             if (dashTimeLeft > 0) {
-                //canFlip = false;
-                //canFlip = false;
-                //rb.velocity = new Vector2(dashSpeed * facingDirection, rb.velocity.y);
-                dashTime -= Time.deltaTime;
+                canMove = false;
+                canFlip = false;
+                rb.velocity = new Vector2(dashSpeed * facingDirection, rb.velocity.y);
+                dashTimeLeft -= Time.deltaTime;
                 if (Mathf.Abs(transform.position.x - lastImageXpos) > distanceBetweenImages){
                     PlayerAfterImagePool.Instance.GetFromPool();
                     lastImageXpos = transform.position.x;
                 }
             }
-           //if (dashTimeLeft <= 0 || isTouchingWall) {
+           if (dashTimeLeft <= 0) {
+                Debug.Log("Acabo el dash");
                 isDashing = false;
-                //canMove = true;
-                //canFlip = true;
-            //}
-            
+                canMove = true;
+                canFlip = true;
+            }
         }
     }
 
@@ -126,23 +148,40 @@ public class PlayerController : MonoBehaviour{
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,whatIsGround);
     }
 
-    private void ApplyMovement(){
-        rb.velocity = new Vector2(movementSpeed*movementInputDirection, rb.velocity.y);
+    private void ApplyMovement(){ //Aplica el movimiento
+        if (canMove && movementInputDirection != 0) { //Si 'canMove' es false no se podra mover
+            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        }
+        
     }
 
+    private void Atack(){
+        anim.SetTrigger("Golpe");
+        Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
+        foreach (Collider2D colisionador in objetos){
+            if (colisionador.CompareTag("Enemigo")){
+                colisionador.transform.GetComponent<Enemigo>().TomarDano(danoGolpe);
+            }
+        }
+    }
     private void Jump() {
         if (canJump) {
+            jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
        
     }
     private void Flip() {
-        isFacingRigth = !isFacingRigth;
-        transform.Rotate(0.0f,180.0f, 0.0f);
+        if (canFlip) {
+            facingDirection *= -1;
+            isFacingRigth = !isFacingRigth;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(controladorGolpe.position, radioGolpe);
     }
 }
