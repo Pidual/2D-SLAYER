@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         CheckInput();
+        CheckIfCanJump();
         CheckMovmentDirection();
         UpdateAnimationsAndSounds();
-        CheckIfCanJump();
         CheckDash();
     }
     private void FixedUpdate(){
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour{
     }
 
     private void CheckIfCanJump() {
-        if (isGrounded && rb.velocity.y <= 0){
+        if (isGrounded){
             canJump = true;
         }
         else {
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour{
 
     private void AttempToDash() {
         isDashing = true;
-        dashSoundEffect.Play();
+        if (isGrounded) dashSoundEffect.Play();
         dashTimeLeft = dashTime;
         lastDash = Time.time;
         PlayerAfterImagePool.Instance.GetFromPool();
