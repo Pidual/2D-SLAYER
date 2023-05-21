@@ -60,9 +60,9 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Parallax.cs" />
     <Compile Include="Assets\Scripts\PlayerAfterImageSprite.cs" />
+    <Compile Include="Assets\EndlessCaveAmbience\Scripts\RandomMusic.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerAfterImagePool.cs" />
-    <Compile Include="Assets\EndlessCaveAmbience\Scripts\RandomMusic.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

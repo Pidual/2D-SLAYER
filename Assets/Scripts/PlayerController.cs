@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour{
     public float dashCoolDown;
 
     [SerializeField] private Transform controladorGolpe;
+    [SerializeField] private Transform controladorGolpeDash;
     [SerializeField] private float radioGolpe;
     [SerializeField] private float danoGolpe;
     [SerializeField] private float tiempoEntreAtaques;
@@ -121,6 +122,14 @@ public class PlayerController : MonoBehaviour{
         lastDash = Time.time;
         PlayerAfterImagePool.Instance.GetFromPool();
         lastImageXpos = transform.position.x;
+        Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpeDash.position, radioGolpe);
+        foreach (Collider2D colisionador in objetos)
+        {
+            if (colisionador.CompareTag("Enemigo"))
+            {
+                colisionador.transform.GetComponent<Enemigo>().TomarDano(danoGolpe*3);
+            }
+        }
     }
 
     private void CheckDash() {
@@ -184,5 +193,6 @@ public class PlayerController : MonoBehaviour{
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawWireSphere(controladorGolpe.position, radioGolpe);
+        Gizmos.DrawWireSphere(controladorGolpeDash.position, radioGolpe);
     }
 }
