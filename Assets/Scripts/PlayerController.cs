@@ -23,11 +23,10 @@ public class PlayerController : MonoBehaviour{
     public bool canJump;
     public LayerMask whatIsGround;
     public Transform groundCheck;
-
-    [SerializeField]
-    private AudioSource walkSoundEffect;
-    [SerializeField]
-    private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource dashSoundEffect;
+    [SerializeField] private AudioSource walkSoundEffect;
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource atackSoundEffect;
     private bool isDashing = false;
     private float dashTimeLeft;
     private float lastImageXpos;
@@ -117,6 +116,7 @@ public class PlayerController : MonoBehaviour{
 
     private void AttempToDash() {
         isDashing = true;
+        dashSoundEffect.Play();
         dashTimeLeft = dashTime;
         lastDash = Time.time;
         PlayerAfterImagePool.Instance.GetFromPool();
@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour{
 
     private void Atack(){
         anim.SetTrigger("Golpe");
+        atackSoundEffect.Play();
         Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
         foreach (Collider2D colisionador in objetos){
             if (colisionador.CompareTag("Enemigo")){
