@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
 
-
-
     private float movementInputDirection;
     private Rigidbody2D rb;
     private Animator anim;
@@ -35,6 +33,7 @@ public class PlayerController : MonoBehaviour{
     public float dashSpeed; //lo rapido que se mueve en el dash
     public float distanceBetweenImages;
     public float dashCoolDown;
+    [SerializeField] private float vida;
 
     [SerializeField] private Transform controladorGolpe;
     [SerializeField] private Transform controladorGolpeDash;
@@ -48,7 +47,6 @@ public class PlayerController : MonoBehaviour{
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         UpdateAnimationsAndSounds();
-        Debug.Log(" Player created");
     }
 
     // Update is called once per frame
@@ -56,12 +54,12 @@ public class PlayerController : MonoBehaviour{
         CheckInput();
         CheckIfCanJump();
         CheckMovmentDirection();
-        UpdateAnimationsAndSounds();
         CheckDash();
     }
     private void FixedUpdate(){
         ApplyMovement();
         CheckSurroundings();
+        UpdateAnimationsAndSounds();
     }
 
     private void CheckIfCanJump() {
@@ -79,7 +77,7 @@ public class PlayerController : MonoBehaviour{
         else if (!isFacingRigth && movementInputDirection > 0) {
             Flip();
         }
-        if (rb.velocity.x != 0 && !isDashing){
+        if (Mathf.Abs(rb.velocity.x) >= 0.01f && !isDashing){
             isWalking = true;
         }
         else {
@@ -127,7 +125,7 @@ public class PlayerController : MonoBehaviour{
         {
             if (colisionador.CompareTag("Enemigo"))
             {
-                colisionador.transform.GetComponent<Enemigo>().TomarDano(danoGolpe*3);
+                colisionador.transform.GetComponent<Enemigo2D>().TakeDamage(danoGolpe*5);
             }
         }
     }
@@ -170,11 +168,11 @@ public class PlayerController : MonoBehaviour{
         Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
         foreach (Collider2D colisionador in objetos){
             if (colisionador.CompareTag("Enemigo")){
-                colisionador.transform.GetComponent<Enemigo>().TomarDano(danoGolpe);
+                colisionador.transform.GetComponent<Enemigo2D>().TakeDamage(danoGolpe);
             }
         }
     }
-    private void Jump() {
+    private void Jump(){
         if (canJump) {
             jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -188,7 +186,11 @@ public class PlayerController : MonoBehaviour{
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
     }
-
+    public void TakeDamage(float damage) {
+        vida -= damage;
+        Debug.Log("Daño recibido");
+        anim.SetTrigger("gotHit");
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
