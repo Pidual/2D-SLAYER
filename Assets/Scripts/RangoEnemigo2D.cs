@@ -7,8 +7,7 @@ public class RangoEnemigo2D : MonoBehaviour
     public Animator ani;
     public Enemigo2D enemigo;
 
-    void OnTriggerEnter2D(Collider2D coll)
-    {
+    void OnTriggerEnter2D(Collider2D coll){
         if (coll.CompareTag("Player")){
            ani.SetBool("walk", false);
            ani.SetBool("run", false);

@@ -191,6 +191,7 @@ public class PlayerController : MonoBehaviour{
         Debug.Log("Daño recibido");
         anim.SetTrigger("gotHit");
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
