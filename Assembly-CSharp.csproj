@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\PlayerAfterImageSprite.cs" />
     <Compile Include="Assets\Scripts\MenuOptions.cs" />
     <Compile Include="Assets\EndlessCaveAmbience\Scripts\RandomMusic.cs" />
+    <Compile Include="Assets\Scripts\TextoFlotante.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\RangoEnemigo2D.cs" />
     <Compile Include="Assets\Scripts\HitEnemigo2D.cs" />
