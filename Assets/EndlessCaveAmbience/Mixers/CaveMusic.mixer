@@ -140,6 +140,8 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: f4535c22f2aa7413d8d4bbf51f165c37
     name: CaveMasterVol
+  - guid: be5ac2e3ac1be41b983f0c004e2f1ac7
+    name: MyExposedParam
   m_AudioMixerGroupViews:
   - guids:
     - 700b7f98ee8f84318b5cfb12bf084e20
