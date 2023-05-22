@@ -40,13 +40,14 @@
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\Parallax.cs" />
      <Compile Include="Assets\Scripts\PlayerAfterImageSprite.cs" />
+     <Compile Include="Assets\Scripts\MenuOptions.cs" />
      <Compile Include="Assets\EndlessCaveAmbience\Scripts\RandomMusic.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\RangoEnemigo2D.cs" />
      <Compile Include="Assets\Scripts\HitEnemigo2D.cs" />
-     <Compile Include="Assets\Scripts\PlayerAfterImagePool.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\Scripts\MenuOptions.cs" />
+     <Compile Include="Assets\Scripts\PlayerAfterImagePool.cs" />
+     <Compile Include="Assets\Scripts\History.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
