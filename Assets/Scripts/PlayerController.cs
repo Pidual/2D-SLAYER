@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
@@ -188,8 +189,17 @@ public class PlayerController : MonoBehaviour{
     }
     public void TakeDamage(float damage) {
         vida -= damage;
-        Debug.Log("Daño recibido");
         anim.SetTrigger("gotHit");
+        if(vida <= 0) {
+            Die();
+        }
+    }
+
+    private void Die() {
+        canMove = false;
+        canJump = false;
+        canFlip = false;
+        anim.SetTrigger("Player Death");
     }
 
     private void OnDrawGizmos()
@@ -197,5 +207,9 @@ public class PlayerController : MonoBehaviour{
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawWireSphere(controladorGolpe.position, radioGolpe);
         Gizmos.DrawWireSphere(controladorGolpeDash.position, radioGolpe);
+    }
+
+    private void RestartLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
