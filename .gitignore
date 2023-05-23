@@ -11,3 +11,8 @@ Temp/workerlic
 Temp/FSTimeGet-6044a5dff65c2364fbe12767741f5f4e
 Logs/shadercompiler-UnityShaderCompiler.exe0.log
 UserSettings/Layouts/default-2021.dwlt
+*.log
+Logs/AssetImportWorker0.log
+Logs/AssetImportWorker1-prev.log
+.vs/2D-SLAYER/v16/.suo
+*.log

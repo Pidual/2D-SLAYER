@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour{
     private Animator anim;
     private bool canMove = true;
     private bool canFlip =true;
+    private bool canDash = true;
     private int facingDirection = 1;
   
     public float movementSpeed = 10.0f;
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour{
             Jump();
         }
         if (Input.GetButtonDown("Dash")){
-            if (Time.time >= (lastDash + dashCoolDown)) {
+            if (Time.time >= (lastDash + dashCoolDown) && canDash) {
                 AttempToDash();
             }  
         }
@@ -199,7 +200,10 @@ public class PlayerController : MonoBehaviour{
         canMove = false;
         canJump = false;
         canFlip = false;
+        canDash = false;
         anim.SetTrigger("Player Death");
+        GetComponent<BoxCollider2D>().enabled = false;
+        rb.gravityScale = 0;
     }
 
     private void OnDrawGizmos()
