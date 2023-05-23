@@ -191,7 +191,8 @@ public class PlayerController : MonoBehaviour{
         Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
         foreach (Collider2D colisionador in objetos){
             if (colisionador.CompareTag("Enemigo")){
-                colisionador.transform.GetComponent<Enemigo2D>().TakeDamage(GetCategory(MonteCarloGenerator.MonteCarlo(1)[0]) * danoGolpe);
+                colisionador.transform.GetComponent<Enemigo2D>().
+                TakeDamage(GetCategory(MonteCarloGenerator.MonteCarlo(1)[0]) * danoGolpe);
             }
         }
     }

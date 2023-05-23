@@ -11,9 +11,7 @@ namespace MonteCarloLibrary{
             int seed = (int)(random.NextDouble() * 10000);
             Console.WriteLine("Seed: " + seed);
             int xi = seed;
-
-            while (quantity > 0)
-            {
+            while (quantity > 0){
                 int x2i = xi * xi;
                 int extension = x2i.ToString().Length;
                 quantity--;
