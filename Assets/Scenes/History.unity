@@ -477,23 +477,24 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "ALEX'S INFERNO\n\nEn un peque\xF1o pueblo, un joven llamado Alex viv\xEDa
-    una vida normal y pac\xEDfica. Un d\xEDa, mientras exploraba el \xE1tico de su
-    abuelo desaparecido hac\xEDa unos pocos meses, descubri\xF3 un antiguo libro
-    de hechizos. Movido por la curiosidad y la esperanza de que este libro le ayudar\xE1
-    encontrar a su abuelo, comenz\xF3 a leer el libro y se encontr\xF3 con un poderoso
-    conjuro de teletransportaci\xF3n. Sin pensarlo dos veces, Alex decidi\xF3 probar
-    el conjuro en un lugar remoto cercano al pueblo sin saber lo que le esperar\xEDa.\r\nUna
-    vez Alex termin\xF3 el conjuro noto como se formaba una especie de t\xFAnel con
-    una luz al final de este, el trata de avanzar hacia la luz, sin embargo a su
-    espalda sent\xEDa un ardiente fuego que intentaba consumirlo, Alex intent\xF3
-    no dejarse abrumar por el fuego y continuar su camino hacia la luz pero no pudo
-    seguir ya que una mano demoniaca lo jal\xF3 para atr\xE1s haci\xE9ndolo caer
-    hacia las llamas.\r\nAl despertar Alex se percata de lo sucedido ya que se encontraba
-    rodeado de un paisaje oscuro y muy aterrador d\xE1ndose cuenta que se hallaba
-    en el infierno y que la \xFAnica salida que ten\xEDa era luchar y abrirse paso
-    a trav\xE9s de las criaturas demon\xEDacas y las peligrosas profundidades de
-    aquel lugar.\r\n"
+  m_text: "ALEX'S INFERNO\n\nEn un mundo lleno de magia, donde casi todo ser humano
+    ten\xEDa magia viv\xEDa Alex, un ser humano el cual por alguna razon indescriptible
+    no tenia magia, Alex era feliz en un gran pueblo junto a sus padres hasta que
+    un dia sin previo aviso los padres de Alex desaparecieron sin dejar rastro, es
+    as\xED como su abuelo lo adopta y se lo lleva a vivir al bosque. Durante todos
+    esos a\xF1os, Alex se entren\xF3 intensamente bajo la tutor\xEDa de su abuelo,
+    pues si no ten\xEDa magia ten\xEDa que compensarlo con fuerza y una gran espada,
+    todo el esfuerzo de Alex era  con la esperanza de obtener la fuerza suficiente
+    para para poder librar los peligros de este inmenso mundo, que eran a\xFAn m\xE1s
+    dif\xEDciles para un ser humano sin magia, cuando su abuelo sali\xF3 en busca
+    de comida un extra\xF1o lobo entr\xF3 a la casa e intent\xF3 comerse a alex,
+    como pudo se libr\xF3, pero le desfigur\xF3 el rostro, es as\xED como desde ese
+    momento alex tuvo que usar una capucha sobre su rostro, pues no se sent\xEDa
+    bien con c\xF3mo se ve\xEDa, exist\xEDa magia que pod\xEDa curarlo, pero era
+    demasiado rara poderosa, y quienes la pose\xEDan cobrarian millones de monedas
+    de oro solo por curarlo.\r\nExactamente diez a\xF1os despu\xE9s de la desaparici\xF3n
+    de sus padres, en un d\xEDa que marcaba el aniversario de su partida, el abuelo
+    de Alex tambi\xE9n desapareci\xF3\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -16,12 +16,12 @@ public class History : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Level1");
         }
     }
 
     public void WaitToEnd()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Level1");
     }
 }
