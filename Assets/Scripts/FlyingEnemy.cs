@@ -11,7 +11,6 @@ public class FlyingEnemy : MonoBehaviour{
     [SerializeField] float maxDistance;
     Vector2 wayPoint;
 
-    private bool chase = false;
     public Transform startingPoint;
     private GameObject player;
    
@@ -26,12 +25,6 @@ public class FlyingEnemy : MonoBehaviour{
         if (Vector2.Distance(transform.position, wayPoint) < range) {
             SetNewDestination();
         }
-        //if (player == null)
-            //return;
-        //if (chase = true)
-            //Chase();
-        //else
-            //Goto start
         Flip();
     }
 

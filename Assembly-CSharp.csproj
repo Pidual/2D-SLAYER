@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\PlayerAfterImagePool.cs" />
     <Compile Include="Assets\Scripts\FlyingEnemy.cs" />
     <Compile Include="Assets\Scripts\RandomWalkLibrary.cs" />
+    <Compile Include="Assets\Scripts\MonteCarloLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

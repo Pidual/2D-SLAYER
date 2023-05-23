@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using MonteCarloLibrary;
 
 public class PlayerController : MonoBehaviour{
 
@@ -165,13 +166,32 @@ public class PlayerController : MonoBehaviour{
         
     }
 
+    public static float GetCategory(double number){
+        if (number >= 0 && number <= 0.25){
+            return 0.5f;
+        }
+        else if (number > 0.25 && number <= 0.5){
+            return 0.75f;
+        }
+        else if (number > 0.5 && number <= 0.75){
+            return 1f;
+        }
+        else if (number > 0.75 && number <= 1)
+        {
+            return 2f;
+        }
+        else
+        {
+            return -1f;
+        }
+    }
     private void Atack(){
         anim.SetTrigger("Golpe");
         atackSoundEffect.Play();
         Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
         foreach (Collider2D colisionador in objetos){
             if (colisionador.CompareTag("Enemigo")){
-                colisionador.transform.GetComponent<Enemigo2D>().TakeDamage(danoGolpe);
+                colisionador.transform.GetComponent<Enemigo2D>().TakeDamage(GetCategory(MonteCarloGenerator.MonteCarlo(1)[0]) * danoGolpe);
             }
         }
     }
@@ -182,6 +202,7 @@ public class PlayerController : MonoBehaviour{
         }
        
     }
+
     private void Flip() {
         if (canFlip) {
             facingDirection *= -1;
