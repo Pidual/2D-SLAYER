@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour{
     private bool canMove = true;
     private bool canFlip =true;
     private bool canDash = true;
+    private bool canAttack = true;
     private int facingDirection = 1;
   
     public float movementSpeed = 10.0f;
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour{
         if (tiempoSiguienteAtaque > 0){
             tiempoSiguienteAtaque -= Time.deltaTime;
         }
-        if (Input.GetButtonDown("Fire1") && tiempoSiguienteAtaque <= 0){
+        if (Input.GetButtonDown("Fire1") && tiempoSiguienteAtaque <= 0 && canAttack){
             Atack();
             tiempoSiguienteAtaque = tiempoEntreAtaques;
         }
@@ -201,8 +202,10 @@ public class PlayerController : MonoBehaviour{
         canJump = false;
         canFlip = false;
         canDash = false;
+        canAttack = false;
         anim.SetTrigger("Player Death");
         GetComponent<BoxCollider2D>().enabled = false;
+        rb.velocity = new Vector2(0, 0);
         rb.gravityScale = 0;
     }
 
