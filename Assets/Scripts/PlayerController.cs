@@ -59,16 +59,16 @@ public class PlayerController : MonoBehaviour{
     }
 
     // Update is called once per frame 
-    void Update(){
+    void Update(){ //Se ejecuta en la cantidad de fps (Esto explica por que GTA V no se puede jugar a mas de 240 fps por que se buggea)
         CheckInput(); //Revisa que teclas precionamos
         CheckIfCanJump(); //Revisa si podemos saltar
         CheckMovmentDirection(); //
         CheckDash();
     }
-    private void FixedUpdate(){
-        ApplyMovement();
-        CheckSurroundings();
-        UpdateAnimationsAndSounds();
+    private void FixedUpdate(){ //Este metodo se ejecuta siempre 60 veces por segundo sin exepcion
+        ApplyMovement(); //Aplica el movimiento
+        CheckSurroundings(); //Revisa si estamos tocando el piso
+        UpdateAnimationsAndSounds(); //Animaciones y sonidos :P
     }
 
     //Javadoc ;p
