@@ -20,3 +20,4 @@ Logs/AssetImportWorker2-prev.log
 Logs/AssetImportWorker2-prev.log
 Logs/AssetImportWorker1.log
 Logs/AssetImportWorker7-prev.log
+*.log

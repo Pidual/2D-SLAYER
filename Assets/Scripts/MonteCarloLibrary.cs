@@ -23,8 +23,7 @@ namespace MonteCarloLibrary{
             return generated_nums.ToArray();
         }
 
-        private static int extractNums(int num, int extension)
-        {
+        private static int extractNums(int num, int extension){
             int segmento = 0;
             string num_str = num.ToString();
             int inicio = (extension - 4) / 2;
